@@ -1,0 +1,91 @@
+In this assignment, you'll use the GIPHY API to make a dynamic web page that populates with gifs of your choice. To finish this task, you must call the GIPHY API and use JavaScript and jQuery to change the HTML of your site.
+
+Create a search form with a JQuery click handler that calls an AJAX function. The QueryURL should include your API key and the user's search term. Be sure to use https:// so the page will work on GitHub.
+   * Hint: this code will look similar to your solution for Activity #26 (Movie DB Form example).
+
+1. Create an alt attribute for each gif.
+
+2. When the user clicks one of the still GIPHY images, the gif should stop playing. If the user clicks the gif again, it should start animating.
+
+3. Use local storage to remember the user's search term, and display those images again when the user returns to the page.
+
+4. Use bootstrap to make fully mobile responsive layout. Add custom CSS for typography and colors.
+
+https://api.giphy.com/v1/gifs/search?q=levitation&api_key=wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV&limit=5
+https://api.giphy.com/v1/gifs/search?q=meditation&api_key=wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV&limit=5
+https://api.giphy.com/v1/gifs/search?q=spacex&api_key=wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV&limit=5
+
+function getMovie(movie) {
+
+      // queryURL endpoint for GIPHY API
+      var queryURL = "https://api.giphy.com/v1/gifs/search?q=spacex&api_key=wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV&limit=5";
+
+      // AJAX call to GIPHY API with promise and callback handler
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        if (response.Response === "False") {
+          alert(response.Error);
+        }
+        else if (subjectList.indexOf(response.Title) >= 0) {
+          alert ("Subject already in List!")
+        }
+        else {
+          createCard(response);
+          subjectList.push(response.Title);
+        }
+      });
+
+    }
+
+
+
+
+
+
+
+
+
+
+GIPHY Developer
+https://developers.giphy.com/dashboard/
+my1stApp
+Api Key:
+wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV
+my1stApp URL - https://api.giphy.com/v1/gifs/search?q=ryan+gosling&api_key=wPDa4EjfIpXM8MhwGbu93SBi1y7XPUhV&limit=5
+
+
+ACTIVITY 21 NOTES
+
+ // queryURL endpoint for GIPHY API
+    var queryURL = "http://www.omdbapi.com/?t=Toy Story 4&apikey=trilogy";
+
+    // AJAX call to OBMD API with promise and callback handler
+    $.ajax({
+      url: queryURL,
+      method: "GET"
+    }).then(function(response) {
+
+      // Add movie name
+      $("#movie-name").html(response.Title);
+
+      // Add description
+      $("#movie-description").html(response.Plot);
+      
+      // Create an image elment, add src attribute, and append to figure
+      var posterImage = $("<img>");
+      posterImage.attr("src", response.Poster);
+      $("#movie-poster").append(posterImage);
+
+    });
+
+
+
+
+
+
+
+
+Make image element
+Set source of image element using URLs inside of the HTML using . format. See capture file.
